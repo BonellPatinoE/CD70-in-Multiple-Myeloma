@@ -9,10 +9,12 @@ library(ggpubr)
 
 
 
-
 ## Read HtSeq data
-raw <- data.frame(Expression.Estimates...Gene.Based_MMRF_CoMMpass_IA19_star_geneUnstranded_counts)
+raw<-read_tsv("Expression Estimates - Gene Based_MMRF_CoMMpass_IA19_star_geneUnstranded_counts.tsv")
+raw<-data.frame(raw)
+raw
 ncol(raw)
+raw
 counts <- as.matrix(raw[-1])
 counts
 rownames(counts) <- raw$Gene
@@ -273,7 +275,9 @@ temp_bar1%>%ggplot(aes(x = x, y = y)) +
 
     ## ISS 1 vs 2 Vs 3
 
-ISS<-data.frame(MMRF_CoMMpass_IA19_PER_PATIENT)
+ISS<-read_tsv("MMRF_CoMMpass_IA19_PER_PATIENT.tsv")
+ISS<-data.frame(ISS)
+ISS
 ISS<-ISS%>%select(PUBLIC_ID, D_PT_iss)
 ISS
 nrow(ISS)
@@ -282,9 +286,9 @@ colnames(ISS)<-c("patient", "ISS")
 ISS
 
 nrow(ids)
+ids
 ids1
 unique(ids$patient)
-ids1<-ids%>%filter(visit==1) # base line
 ids1
 nrow(ids1)
 nrow(ISS)
@@ -306,7 +310,7 @@ ISS_1vs2<-na.omit(ISS_1vs2)
 nrow(ISS_1vs2)
 ISS_1vs2$ISS <- factor(ISS_1vs2$ISS, levels = c("1", "2", "3"))
 ISS_1vs2$ISS
-ids
+ISS_1vs2
 
 summary(colnames(counts) %in% ISS_1vs2$sample_id)
 counts3 <-counts[,colnames(counts) %in% ISS_1vs2$sample_id]
@@ -349,7 +353,6 @@ plotMA(resLFC1, ylim=c(-2,2), main = " MA plot ISS 2 vs 1 LFC shrink")
   
   ISS_1vs2
   
-  temp <- as.data.frame(assay(vsd))
   temp$GENE <- res1$GENE
   temp$GENE_NAME <- res1$GENE_NAME
   ncol(temp)
@@ -389,6 +392,12 @@ temp_bar2 %>% rstatix::wilcox_test(temp_flip ~ ISS)
 
 head(temp_bar2)
 nrow(temp_bar2)
+head(temp_bar2)
+
+temp_bar2 %>%
+  group_by(ISS) %>%
+  summarize(mean_temp_flip = mean(temp_flip), median_temp_flip = median(temp_flip))
+
 
 temp_bar2%>%ggplot(aes(ISS, temp_flip)) + 
   geom_boxplot(outlier.shape = NA) +
