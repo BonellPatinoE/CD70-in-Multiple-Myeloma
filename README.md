@@ -1,5 +1,5 @@
 # CD70-in-Multiple-Myeloma
-RNAseq data analysis about CD70 expression in primary samples from coMMpass (MMRF) IA19.
+RNAseq data analysis about CD70 expression in primary samples from coMMpass (MMRF) IA19 in the pre-print: Targeting high-risk multiple myeloma genotypes with optimized anti-CD70 CAR-T cells. doi: https://doi.org/10.1101/2024.02.24.581875. https://www.biorxiv.org/content/10.1101/2024.02.24.581875v1
 
 Bioinformatic analysis performed at Wiita Lab at the University of California, San Francisco (UCSF), on RNAseq data showed previously higher CD70 expression in relapsed myeloma patients. Here we analyzed CD70 expression in RNAseq data from coMMpass dataset (IA19) in CD138+ cells from primary samples.
 
